@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alexgaoyh.zz.base.sysman.dao.auto.mapper.SysmanUserMapper">
+	<resultMap id="BaseResultMap"
+		type="com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser">
+		<id column="sysman_user_user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="sysman_user_user_name" property="userName"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_pwd" property="userPwd"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_real_name" property="realName"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_email" property="userEmail"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_phone" property="userPhone"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_position" property="userPosition"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_position_desc" property="userPositionDesc"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_user_state" property="userState"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_delete_flag" property="deleteFlag"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_creater_id" property="createrId"
+			jdbcType="VARCHAR" />
+		<result column="sysman_user_create_time" property="createTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from sysman_user sysman_user
+		where sysman_user.user_id =
+		#{userId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		sysman_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser">
+		insert into ${dynamicTableName} (user_id, user_name,
+		user_pwd,
+		real_name, user_email, user_phone,
+		user_position,
+		user_position_desc, user_state,
+		delete_flag, creater_id, create_time
+		)
+		values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{userPwd,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{userEmail,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR},
+		#{userPosition,jdbcType=VARCHAR},
+		#{userPositionDesc,jdbcType=VARCHAR}, #{userState,jdbcType=VARCHAR},
+		#{deleteFlag,jdbcType=VARCHAR}, #{createrId,jdbcType=VARCHAR},
+		#{createTime,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser">
+		insert into ${dynamicTableName}
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="userPwd != null">
+				user_pwd,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userPosition != null">
+				user_position,
+			</if>
+			<if test="userPositionDesc != null">
+				user_position_desc,
+			</if>
+			<if test="userState != null">
+				user_state,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="createrId != null">
+				creater_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				#{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userPosition != null">
+				#{userPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="userPositionDesc != null">
+				#{userPositionDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="userState != null">
+				#{userState,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="createrId != null">
+				#{createrId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser">
+		update ${dynamicTableName}
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				user_pwd = #{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userPosition != null">
+				user_position = #{userPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="userPositionDesc != null">
+				user_position_desc =
+				#{userPositionDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="userState != null">
+				user_state = #{userState,jdbcType=VARCHAR},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="createrId != null">
+				creater_id = #{createrId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser">
+		update ${dynamicTableName}
+		set user_name =
+		#{userName,jdbcType=VARCHAR},
+		user_pwd = #{userPwd,jdbcType=VARCHAR},
+		real_name = #{realName,jdbcType=VARCHAR},
+		user_email =
+		#{userEmail,jdbcType=VARCHAR},
+		user_phone =
+		#{userPhone,jdbcType=VARCHAR},
+		user_position =
+		#{userPosition,jdbcType=VARCHAR},
+		user_position_desc =
+		#{userPositionDesc,jdbcType=VARCHAR},
+		user_state =
+		#{userState,jdbcType=VARCHAR},
+		delete_flag =
+		#{deleteFlag,jdbcType=VARCHAR},
+		creater_id =
+		#{createrId,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=VARCHAR}
+		where user_id =
+		#{userId,jdbcType=VARCHAR}
+	</update>
+	<sql id="OracleDialectPrefix">
+		<if test="page != null and _databaseId == 'oracle'">
+			select * from ( select row_.*, rownum rownum_ from (
+		</if>
+	</sql>
+	<sql id="OracleDialectSuffix">
+		<if test="page != null and _databaseId == 'oracle'">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+		</if>
+	</sql>
+	<sql id="MysqlDialect">
+		<if test="page != null and _databaseId == 'mysql'">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</sql>
+	<select id="selectCountByMap" parameterType="map" resultType="int">
+		select count(*) from
+		<if test="dynamicTableName != null and dynamicTableName != ''"> ${dynamicTableName} sysman_user </if>
+		<if test="dynamicTableName == null or dynamicTableName == ''"> sysman_user sysman_user</if>
+		<include refid="Base_Query_Map_Condition" />
+	</select>
+	<select id="selectListByMap" parameterType="map" resultMap="BaseResultMap">
+		<include refid="OracleDialectPrefix" />
+		select
+		<include refid="Base_Column_List" />
+		from
+		<if test="dynamicTableName != null and dynamicTableName != ''"> ${dynamicTableName} sysman_user </if>
+		<if test="dynamicTableName == null or dynamicTableName == ''"> sysman_user sysman_user</if>
+		<include refid="Base_Query_Map_Condition" />
+		<if test="orderBySqlJudgeStr != null and orderBySqlJudgeStr != ''"> order by ${orderBySqlJudgeStr} </if>
+		<if test="orderBySqlJudgeStr == null or orderBySqlJudgeStr == ''"> order by user_id desc</if>
+		<include refid="OracleDialectSuffix" />
+		<include refid="MysqlDialect" />
+	</select>
+	<sql id="Base_Query_Map_Condition">
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="userId != null and userId != ''">
+				AND sysman_user.user_id = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND sysman_user.user_name = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="userPwd != null and userPwd != ''">
+				AND sysman_user.user_pwd = #{userPwd,jdbcType=VARCHAR}
+			</if>
+			<if test="realName != null and realName != ''">
+				AND sysman_user.real_name = #{realName,jdbcType=VARCHAR}
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				AND sysman_user.user_email =
+				#{userEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				AND sysman_user.user_phone =
+				#{userPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="userPosition != null and userPosition != ''">
+				AND sysman_user.user_position =
+				#{userPosition,jdbcType=VARCHAR}
+			</if>
+			<if test="userPositionDesc != null and userPositionDesc != ''">
+				AND sysman_user.user_position_desc =
+				#{userPositionDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="userState != null and userState != ''">
+				AND sysman_user.user_state =
+				#{userState,jdbcType=VARCHAR}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				AND sysman_user.delete_flag =
+				#{deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createrId != null and createrId != ''">
+				AND sysman_user.creater_id =
+				#{createrId,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND sysman_user.create_time =
+				#{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userId != null and myNotEqual_userId != ''">
+				AND sysman_user.user_id !=
+				#{myNotEqual_userId,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userName != null and myNotEqual_userName != ''">
+				AND sysman_user.user_name !=
+				#{myNotEqual_userName,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userPwd != null and myNotEqual_userPwd != ''">
+				AND sysman_user.user_pwd !=
+				#{myNotEqual_userPwd,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_realName != null and myNotEqual_realName != ''">
+				AND sysman_user.real_name !=
+				#{myNotEqual_realName,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userEmail != null and myNotEqual_userEmail != ''">
+				AND sysman_user.user_email !=
+				#{myNotEqual_userEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userPhone != null and myNotEqual_userPhone != ''">
+				AND sysman_user.user_phone !=
+				#{myNotEqual_userPhone,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="myNotEqual_userPosition != null and myNotEqual_userPosition != ''">
+				AND sysman_user.user_position !=
+				#{myNotEqual_userPosition,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="myNotEqual_userPositionDesc != null and myNotEqual_userPositionDesc != ''">
+				AND sysman_user.user_position_desc !=
+				#{myNotEqual_userPositionDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_userState != null and myNotEqual_userState != ''">
+				AND sysman_user.user_state !=
+				#{myNotEqual_userState,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_deleteFlag != null and myNotEqual_deleteFlag != ''">
+				AND sysman_user.delete_flag !=
+				#{myNotEqual_deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_createrId != null and myNotEqual_createrId != ''">
+				AND sysman_user.creater_id !=
+				#{myNotEqual_createrId,jdbcType=VARCHAR}
+			</if>
+			<if test="myNotEqual_createTime != null and myNotEqual_createTime != ''">
+				AND sysman_user.create_time !=
+				#{myNotEqual_createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userId != null and myGreater_userId != ''">
+				AND sysman_user.user_id &gt;
+				#{myGreater_userId,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userName != null and myGreater_userName != ''">
+				AND sysman_user.user_name &gt;
+				#{myGreater_userName,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userPwd != null and myGreater_userPwd != ''">
+				AND sysman_user.user_pwd &gt;
+				#{myGreater_userPwd,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_realName != null and myGreater_realName != ''">
+				AND sysman_user.real_name &gt;
+				#{myGreater_realName,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userEmail != null and myGreater_userEmail != ''">
+				AND sysman_user.user_email &gt;
+				#{myGreater_userEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userPhone != null and myGreater_userPhone != ''">
+				AND sysman_user.user_phone &gt;
+				#{myGreater_userPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userPosition != null and myGreater_userPosition != ''">
+				AND sysman_user.user_position &gt;
+				#{myGreater_userPosition,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="myGreater_userPositionDesc != null and myGreater_userPositionDesc != ''">
+				AND sysman_user.user_position_desc &gt;
+				#{myGreater_userPositionDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_userState != null and myGreater_userState != ''">
+				AND sysman_user.user_state &gt;
+				#{myGreater_userState,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_deleteFlag != null and myGreater_deleteFlag != ''">
+				AND sysman_user.delete_flag &gt;
+				#{myGreater_deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_createrId != null and myGreater_createrId != ''">
+				AND sysman_user.creater_id &gt;
+				#{myGreater_createrId,jdbcType=VARCHAR}
+			</if>
+			<if test="myGreater_createTime != null and myGreater_createTime != ''">
+				AND sysman_user.create_time &gt;
+				#{myGreater_createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userId != null and myLesser_userId != ''">
+				AND sysman_user.user_id &lt;
+				#{myLesser_userId,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userName != null and myLesser_userName != ''">
+				AND sysman_user.user_name &lt;
+				#{myLesser_userName,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userPwd != null and myLesser_userPwd != ''">
+				AND sysman_user.user_pwd &lt;
+				#{myLesser_userPwd,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_realName != null and myLesser_realName != ''">
+				AND sysman_user.real_name &lt;
+				#{myLesser_realName,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userEmail != null and myLesser_userEmail != ''">
+				AND sysman_user.user_email &lt;
+				#{myLesser_userEmail,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userPhone != null and myLesser_userPhone != ''">
+				AND sysman_user.user_phone &lt;
+				#{myLesser_userPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userPosition != null and myLesser_userPosition != ''">
+				AND sysman_user.user_position &lt;
+				#{myLesser_userPosition,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="myLesser_userPositionDesc != null and myLesser_userPositionDesc != ''">
+				AND sysman_user.user_position_desc &lt;
+				#{myLesser_userPositionDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_userState != null and myLesser_userState != ''">
+				AND sysman_user.user_state &lt;
+				#{myLesser_userState,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_deleteFlag != null and myLesser_deleteFlag != ''">
+				AND sysman_user.delete_flag &lt;
+				#{myLesser_deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_createrId != null and myLesser_createrId != ''">
+				AND sysman_user.creater_id &lt;
+				#{myLesser_createrId,jdbcType=VARCHAR}
+			</if>
+			<if test="myLesser_createTime != null and myLesser_createTime != ''">
+				AND sysman_user.create_time &lt;
+				#{myLesser_createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="myLike_userId != null and myLike_userId != ''">
+				AND sysman_user.user_id like CONCAT('%',
+				#{myLike_userId,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userName != null and myLike_userName != ''">
+				AND sysman_user.user_name like CONCAT('%',
+				#{myLike_userName,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userPwd != null and myLike_userPwd != ''">
+				AND sysman_user.user_pwd like CONCAT('%',
+				#{myLike_userPwd,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_realName != null and myLike_realName != ''">
+				AND sysman_user.real_name like CONCAT('%',
+				#{myLike_realName,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userEmail != null and myLike_userEmail != ''">
+				AND sysman_user.user_email like CONCAT('%',
+				#{myLike_userEmail,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userPhone != null and myLike_userPhone != ''">
+				AND sysman_user.user_phone like CONCAT('%',
+				#{myLike_userPhone,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userPosition != null and myLike_userPosition != ''">
+				AND sysman_user.user_position like CONCAT('%',
+				#{myLike_userPosition,jdbcType=VARCHAR},'%' )
+			</if>
+			<if
+				test="myLike_userPositionDesc != null and myLike_userPositionDesc != ''">
+				AND sysman_user.user_position_desc like CONCAT('%',
+				#{myLike_userPositionDesc,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_userState != null and myLike_userState != ''">
+				AND sysman_user.user_state like CONCAT('%',
+				#{myLike_userState,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_deleteFlag != null and myLike_deleteFlag != ''">
+				AND sysman_user.delete_flag like CONCAT('%',
+				#{myLike_deleteFlag,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_createrId != null and myLike_createrId != ''">
+				AND sysman_user.creater_id like CONCAT('%',
+				#{myLike_createrId,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLike_createTime != null and myLike_createTime != ''">
+				AND sysman_user.create_time like CONCAT('%',
+				#{myLike_createTime,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeStart_userId != null and myLikeStart_userId != ''">
+				AND sysman_user.user_id like CONCAT('%',
+				#{myLikeStart_userId,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_userName != null and myLikeStart_userName != ''">
+				AND sysman_user.user_name like CONCAT('%',
+				#{myLikeStart_userName,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_userPwd != null and myLikeStart_userPwd != ''">
+				AND sysman_user.user_pwd like CONCAT('%',
+				#{myLikeStart_userPwd,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_realName != null and myLikeStart_realName != ''">
+				AND sysman_user.real_name like CONCAT('%',
+				#{myLikeStart_realName,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_userEmail != null and myLikeStart_userEmail != ''">
+				AND sysman_user.user_email like CONCAT('%',
+				#{myLikeStart_userEmail,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_userPhone != null and myLikeStart_userPhone != ''">
+				AND sysman_user.user_phone like CONCAT('%',
+				#{myLikeStart_userPhone,jdbcType=VARCHAR})
+			</if>
+			<if
+				test="myLikeStart_userPosition != null and myLikeStart_userPosition != ''">
+				AND sysman_user.user_position like CONCAT('%',
+				#{myLikeStart_userPosition,jdbcType=VARCHAR})
+			</if>
+			<if
+				test="myLikeStart_userPositionDesc != null and myLikeStart_userPositionDesc != ''">
+				AND sysman_user.user_position_desc like CONCAT('%',
+				#{myLikeStart_userPositionDesc,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_userState != null and myLikeStart_userState != ''">
+				AND sysman_user.user_state like CONCAT('%',
+				#{myLikeStart_userState,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_deleteFlag != null and myLikeStart_deleteFlag != ''">
+				AND sysman_user.delete_flag like CONCAT('%',
+				#{myLikeStart_deleteFlag,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_createrId != null and myLikeStart_createrId != ''">
+				AND sysman_user.creater_id like CONCAT('%',
+				#{myLikeStart_createrId,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeStart_createTime != null and myLikeStart_createTime != ''">
+				AND sysman_user.create_time like CONCAT('%',
+				#{myLikeStart_createTime,jdbcType=VARCHAR})
+			</if>
+			<if test="myLikeEnd_userId != null and myLikeEnd_userId != ''">
+				AND sysman_user.user_id like CONCAT(
+				#{myLikeEnd_userId,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userName != null and myLikeEnd_userName != ''">
+				AND sysman_user.user_name like CONCAT(
+				#{myLikeEnd_userName,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userPwd != null and myLikeEnd_userPwd != ''">
+				AND sysman_user.user_pwd like CONCAT(
+				#{myLikeEnd_userPwd,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_realName != null and myLikeEnd_realName != ''">
+				AND sysman_user.real_name like CONCAT(
+				#{myLikeEnd_realName,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userEmail != null and myLikeEnd_userEmail != ''">
+				AND sysman_user.user_email like CONCAT(
+				#{myLikeEnd_userEmail,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userPhone != null and myLikeEnd_userPhone != ''">
+				AND sysman_user.user_phone like CONCAT(
+				#{myLikeEnd_userPhone,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userPosition != null and myLikeEnd_userPosition != ''">
+				AND sysman_user.user_position like CONCAT(
+				#{myLikeEnd_userPosition,jdbcType=VARCHAR},'%' )
+			</if>
+			<if
+				test="myLikeEnd_userPositionDesc != null and myLikeEnd_userPositionDesc != ''">
+				AND sysman_user.user_position_desc like CONCAT(
+				#{myLikeEnd_userPositionDesc,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_userState != null and myLikeEnd_userState != ''">
+				AND sysman_user.user_state like CONCAT(
+				#{myLikeEnd_userState,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_deleteFlag != null and myLikeEnd_deleteFlag != ''">
+				AND sysman_user.delete_flag like CONCAT(
+				#{myLikeEnd_deleteFlag,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_createrId != null and myLikeEnd_createrId != ''">
+				AND sysman_user.creater_id like CONCAT(
+				#{myLikeEnd_createrId,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myLikeEnd_createTime != null and myLikeEnd_createTime != ''">
+				AND sysman_user.create_time like CONCAT(
+				#{myLikeEnd_createTime,jdbcType=VARCHAR},'%' )
+			</if>
+			<if test="myIn_userId != null and myIn_userId != ''">
+				AND sysman_user.user_id in
+				<foreach item="item" index="index" collection="myIn_userId"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userName != null and myIn_userName != ''">
+				AND sysman_user.user_name in
+				<foreach item="item" index="index" collection="myIn_userName"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userPwd != null and myIn_userPwd != ''">
+				AND sysman_user.user_pwd in
+				<foreach item="item" index="index" collection="myIn_userPwd"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_realName != null and myIn_realName != ''">
+				AND sysman_user.real_name in
+				<foreach item="item" index="index" collection="myIn_realName"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userEmail != null and myIn_userEmail != ''">
+				AND sysman_user.user_email in
+				<foreach item="item" index="index" collection="myIn_userEmail"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userPhone != null and myIn_userPhone != ''">
+				AND sysman_user.user_phone in
+				<foreach item="item" index="index" collection="myIn_userPhone"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userPosition != null and myIn_userPosition != ''">
+				AND sysman_user.user_position in
+				<foreach item="item" index="index" collection="myIn_userPosition"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userPositionDesc != null and myIn_userPositionDesc != ''">
+				AND sysman_user.user_position_desc in
+				<foreach item="item" index="index" collection="myIn_userPositionDesc"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_userState != null and myIn_userState != ''">
+				AND sysman_user.user_state in
+				<foreach item="item" index="index" collection="myIn_userState"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_deleteFlag != null and myIn_deleteFlag != ''">
+				AND sysman_user.delete_flag in
+				<foreach item="item" index="index" collection="myIn_deleteFlag"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_createrId != null and myIn_createrId != ''">
+				AND sysman_user.creater_id in
+				<foreach item="item" index="index" collection="myIn_createrId"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+			<if test="myIn_createTime != null and myIn_createTime != ''">
+				AND sysman_user.create_time in
+				<foreach item="item" index="index" collection="myIn_createTime"
+					open="(" separator="," close=")"> #{item} </foreach>
+			</if>
+		</trim>
+	</sql>
+	<sql id="Base_Column_List">
+		<trim suffixOverrides=",">
+			<if test="myColumn_userId == null or myColumn_userId == ''">
+				sysman_user.user_id as sysman_user_user_id ,
+			</if>
+			<if test="myColumn_userName == null or myColumn_userName == ''">
+				sysman_user.user_name as sysman_user_user_name ,
+			</if>
+			<if test="myColumn_userPwd == null or myColumn_userPwd == ''">
+				sysman_user.user_pwd as sysman_user_user_pwd ,
+			</if>
+			<if test="myColumn_realName == null or myColumn_realName == ''">
+				sysman_user.real_name as sysman_user_real_name ,
+			</if>
+			<if test="myColumn_userEmail == null or myColumn_userEmail == ''">
+				sysman_user.user_email as sysman_user_user_email ,
+			</if>
+			<if test="myColumn_userPhone == null or myColumn_userPhone == ''">
+				sysman_user.user_phone as sysman_user_user_phone ,
+			</if>
+			<if test="myColumn_userPosition == null or myColumn_userPosition == ''">
+				sysman_user.user_position as sysman_user_user_position ,
+			</if>
+			<if
+				test="myColumn_userPositionDesc == null or myColumn_userPositionDesc == ''">
+				sysman_user.user_position_desc as
+				sysman_user_user_position_desc ,
+			</if>
+			<if test="myColumn_userState == null or myColumn_userState == ''">
+				sysman_user.user_state as sysman_user_user_state ,
+			</if>
+			<if test="myColumn_deleteFlag == null or myColumn_deleteFlag == ''">
+				sysman_user.delete_flag as sysman_user_delete_flag ,
+			</if>
+			<if test="myColumn_createrId == null or myColumn_createrId == ''">
+				sysman_user.creater_id as sysman_user_creater_id ,
+			</if>
+			<if test="myColumn_createTime == null or myColumn_createTime == ''">
+				sysman_user.create_time as sysman_user_create_time ,
+			</if>
+		</trim>
+	</sql>
+	<select id="selectByPrimaryKeyAndTableName" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${dynamicTableName} sysman_user where sysman_user.user_id = #{id,
+		jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKeyAndTableName" parameterType="String">
+		delete from ${dynamicTableName} where user_id = #{id,
+		jdbcType=VARCHAR}
+	</delete>
+</mapper>

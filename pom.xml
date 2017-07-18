@@ -1,0 +1,285 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.alexgaoyh</groupId>
+	<artifactId>zz-data-openapi</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-RELEASE</version>
+	
+	<name>zz-data-openapi Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	
+	<!-- Nexus 私服配置 -->
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus</name>
+			<url>http://192.168.2.211:8099/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Nexus</name>
+			<url>http://192.168.2.211:8099/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- 使用maven 部署构件至Nexus -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Local Nexus Repository</name>
+			<url>http://192.168.2.211:8099/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Local Nexus Repository</name>
+			<url>http://192.168.2.211:8099/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<springframework.version>4.2.6.RELEASE</springframework.version>
+		<org.mybatis.mybatis>3.2.8</org.mybatis.mybatis>
+		<org.mybatis.mybatis-spring>1.2.2</org.mybatis.mybatis-spring>
+		<javax.servlet.javax.servlet-api>3.0.1</javax.servlet.javax.servlet-api>
+		<javax.servlet.jsp.jsp-api>2.2</javax.servlet.jsp.jsp-api>
+		<junit.version>4.7</junit.version>
+		<fastjson>1.1.28</fastjson>
+		<mysql-connector-java>5.1.21</mysql-connector-java>
+		<commons-lang>2.6</commons-lang>
+		<jstl>1.2</jstl>
+		<project.version>0.0.1-RELEASE</project.version>
+		<zp-zz-obj.version>0.0.1-RELEASE</zp-zz-obj.version>
+		<commons-httpclient>3.1</commons-httpclient>
+
+	</properties>
+	
+	
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.javax.servlet-api}</version>
+			<scope>provided</scope> <!--打包时不包含 -->
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${javax.servlet.jsp.jsp-api}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zhongpin</groupId>
+			<artifactId>zp-zz-redis</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-redis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.zhongpin</groupId>
+			<artifactId>zp-persist-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zhongpin</groupId>
+			<artifactId>zp-service-base</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>zz-data-openapi</finalName>
+		
+		<filters> <!-- 指定使用的 filter -->
+			<filter>src/main/resources/filters/filter-${profiles.env}-env.properties</filter>
+		</filters>
+		<resources>
+			<resource> <!-- 配置需要被替换的资源文件路径, db.properties 应该在 src/main/resource 目录下 -->
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering> <!-- 是否使用过滤器 -->
+			</resource>
+		</resources>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.21.v20170120</version>
+				<configuration>
+					<httpConnector>
+						<port>3602</port>
+					</httpConnector>
+					<stopKey>stop</stopKey>
+					<stopPort>3702</stopPort>
+					<webAppConfig>
+						<contextPath>
+							/
+						</contextPath>
+					</webAppConfig>
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!-- 
+		使用mvn clean package -Ptest或mvn clean package -Pproduct打包
+		<replace file="" token="" value="" />中分别用于指定文件、待替换字符串、替换后的字符串
+	
+	 -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!-- 使用target/web-xml中的web.xml文件打入war包 -->
+				<maven.war.webxml>${basedir}/target/web-xml/web.xml</maven.war.webxml>
+				<profiles.env>dev</profiles.env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault><!--默认启用的是dev环境配置 -->
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<configuration>
+									<argLine>-Xmx1024m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8</argLine>
+									<target>
+										<!-- 将web.xml拷贝一份到target/web-xml目录下 -->
+										<copy file="${basedir}/src/main/webapp/WEB-INF/web.xml"
+											todir="${basedir}/target/web-xml" />
+										<!-- 拷贝后的web.xml中的<param-value>dev</param-value>替换为<param-value>test</param-value> -->
+										<replace file="${basedir}/target/web-xml/web.xml"
+											token="&lt;param-value&gt;dev&lt;/param-value&gt;" value="&lt;param-value&gt;dev&lt;/param-value&gt;" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>product</id>
+			<properties>
+				<!-- 使用target/web-xml中的web.xml文件打入war包 -->
+				<maven.war.webxml>${basedir}/target/web-xml/web.xml</maven.war.webxml>
+				<profiles.env>product</profiles.env>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<configuration>
+									<argLine>-Xmx1024m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8</argLine>
+									<target>
+										<!-- 将web.xml拷贝一份到target/web-xml目录下 -->
+										<copy file="${basedir}/src/main/webapp/WEB-INF/web.xml"
+											todir="${basedir}/target/web-xml" />
+										<!-- 拷贝后的web.xml中的<param-value>dev</param-value>替换为<param-value>product</param-value> -->
+										<replace file="${basedir}/target/web-xml/web.xml"
+											token="&lt;param-value&gt;dev&lt;/param-value&gt;" value="&lt;param-value&gt;product&lt;/param-value&gt;" />
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+</project>
