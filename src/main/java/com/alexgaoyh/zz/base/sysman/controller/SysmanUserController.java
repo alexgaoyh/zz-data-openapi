@@ -16,7 +16,7 @@ public class SysmanUserController {
 	@ResponseBody
 	@RequestMapping(value = "/list", produces = "text/html;charset=UTF-8")
 	public String list(HttpServletRequest request, String jsonData) {
-		
+		request.getParameterNames();
 		return null;
 	}
 }
