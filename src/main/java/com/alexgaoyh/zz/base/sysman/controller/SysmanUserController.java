@@ -14,6 +14,7 @@ import com.alexgaoyh.zz.base.sysman.servive.ISysmanUserService;
 import com.alexgaoyh.zz.vo.sysman.user.SysmanUserVO;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.tamper.BeanMap;
 import com.alibaba.tamper.core.BeanMappingException;
 import com.zhongpin.zp.common.vo.page.PaginationVO;
@@ -37,7 +38,8 @@ public class SysmanUserController {
 		}catch (BeanMappingException e) {
 			e.printStackTrace();  
 		}
-		return JSON.toJSONString(pagination);
+		// 是否输出值为null的字段,默认为false； 也就是说有null时会输出而不是忽略
+		return JSON.toJSONString(pagination, SerializerFeature.WriteMapNullValue);
 	}
 	
 	@RequestMapping(value = "/save", produces = "text/html;charset=UTF-8")
