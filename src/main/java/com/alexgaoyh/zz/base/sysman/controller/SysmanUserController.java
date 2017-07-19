@@ -31,7 +31,7 @@ public class SysmanUserController {
 
 	@RequestMapping(value = "/list", produces = "text/html;charset=UTF-8")
 	public String list(HttpServletRequest request, String data) {
-		PaginationVO<SysmanUser> pagination = new PaginationVO<SysmanUser>(0, CollectionUtilss.newArrayList());
+		PaginationVO<SysmanUser> pagination = new PaginationVO<SysmanUser>();
 		try {
 			SysmanUserVO vo = JSONObject.parseObject(data, SysmanUserVO.class);
 			BeanMap sysmanUserVOBeanMap = BeanMap.create(SysmanUserVO.class);
