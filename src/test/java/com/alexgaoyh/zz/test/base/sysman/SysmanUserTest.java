@@ -12,23 +12,20 @@
 
 package com.alexgaoyh.zz.test.base.sysman;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser;
 import com.alexgaoyh.zz.base.sysman.servive.ISysmanUserService;
+import com.alexgaoyh.zz.vo.sysman.user.SysmanUserVO;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.zhongpin.zp.common.vo.Page;
-import com.zhongpin.zp.common.vo.page.PaginationVO;
 
 /**
  * ClassName : SysmanUserTest <br/>
- * Function : TODO ADD FUNCTION. <br/>
- * Reason : TODO ADD REASON. <br/>
+ * Function : 单元测试. <br/>
+ * Reason : 单元测试. <br/>
  * Date : 2017年7月18日 下午1:42:54 <br/>
  * 
  * @author : alexgaoyh <br/>
@@ -41,7 +38,7 @@ public class SysmanUserTest {
 
 	private ISysmanUserService service;
 
-	@Before
+	// @Before
 	public void prepare() throws Exception {
         String[] springConfigFiles = {"applicationContext.xml"};
 
@@ -61,11 +58,10 @@ public class SysmanUserTest {
 
 		Page page = new Page((beginInt - 1) * Integer.parseInt(recordPerPageStr), Integer.parseInt(recordPerPageStr));
 
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("page", page);
-
-		PaginationVO<SysmanUser> pagination = service.selectPaginationByMap(map);
+		SysmanUserVO vo = new SysmanUserVO();
+		vo.setPage(page);
 		
-		System.out.println(pagination);
+		JSONObject.parseObject(JSON.toJSONString(vo), SysmanUserVO.class);
+		
 	}
 }
