@@ -1,16 +1,29 @@
 package com.alexgaoyh.zz.base.sysman.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alexgaoyh.zz.base.sysman.dao.auto.entity.SysmanUser;
 import com.alexgaoyh.zz.base.sysman.servive.ISysmanUserService;
+import com.alexgaoyh.zz.vo.sysman.user.SysmanUserVO;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.tamper.BeanMap;
+import com.alibaba.tamper.core.BeanMappingException;
+import com.mchange.v1.util.CollectionUtils;
+import com.zhongpin.zp.common.util.collection.CollectionUtilss;
+import com.zhongpin.zp.common.util.collections.CollectionsUtils;
+import com.zhongpin.zp.common.vo.page.PaginationVO;
 
+@Controller
+@ResponseBody
+@RequestMapping(value = "/sysman/user")
 public class SysmanUserController {
 
 	@Resource(name = "sysmanUserService")
@@ -18,10 +31,16 @@ public class SysmanUserController {
 
 	@RequestMapping(value = "/list", produces = "text/html;charset=UTF-8")
 	public String list(HttpServletRequest request, String data) {
-		// data = {"page":{"begin":0,"length":10}}
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		service.selectPaginationByMap(map);
-		return null;
+		PaginationVO<SysmanUser> pagination = new PaginationVO<SysmanUser>(0, CollectionUtilss.newArrayList());
+		try {
+			SysmanUserVO vo = JSONObject.parseObject(data, SysmanUserVO.class);
+			BeanMap sysmanUserVOBeanMap = BeanMap.create(SysmanUserVO.class);
+			Map<Object, Object> map = sysmanUserVOBeanMap.describe(vo);
+			pagination = service.selectPaginationByMap(map);
+		}catch (BeanMappingException e) {
+			e.printStackTrace();  
+		}
+		return JSON.toJSONString(pagination);
 	}
 	
 	@RequestMapping(value = "/save", produces = "text/html;charset=UTF-8")
